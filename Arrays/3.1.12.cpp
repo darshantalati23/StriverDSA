@@ -3,7 +3,16 @@
    the length of the longest subarray that sums to k (ONLY positive numbers).
 
  * Brute: 
-    
+    Here, in this approach, we are going to generate all possible subarrays to solve this problem.
+
+    We will select all possible starting indices(say i) and all possible ending 
+    indices(say j) to generate all possible subarrays. The possible starting indices 
+    i.e. i can vary from index 0 to index n-1(i.e. The last index). For every index i, 
+    the possible ending index j can vary from i to n-1.
+    Time Complexity: O(N3) approx., where N = size of the array.
+    Reason: We are using three nested loops, each running approximately N times.
+
+    Space Complexity: O(1) as we are not using any extra space.
 
  * Better:
     
