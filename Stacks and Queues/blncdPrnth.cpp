@@ -21,7 +21,7 @@ void balPar() {
         if (isOpening(it))
             st.push(cntrBkt(it));
         else {
-            if (st.size()==0||st.top()!=it) {
+            if (st.size()==0||st.top()!=it) { // IMP: always incl "st.size()==0"
                 cout << "NO" << endl;
                 return;
             } else

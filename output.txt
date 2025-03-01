@@ -1,5 +1,5 @@
-YES
-NO
-YES
-NO
-NO
+Top element is: 11
+Popped: 11
+Popped: 8
+Is the stack empty? No
+Size of the stack: 2
