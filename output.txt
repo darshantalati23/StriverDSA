@@ -1,5 +1,9 @@
-Top element is: 11
-Popped: 11
-Popped: 8
+5 80 11 
+Front element is: 5
+Popped: 5
+Popped: 80
+11 
 Is the stack empty? No
+11 
+11 50 
 Size of the stack: 2
