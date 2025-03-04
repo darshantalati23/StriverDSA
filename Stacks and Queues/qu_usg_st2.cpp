@@ -1,95 +1,78 @@
-#include <bits/stdc++.h>
-using namespace std;
-#define ll long long
+#include <iostream>
+#include <stack>
 
 class Queue {
-    public:
-        stack<int> smn, ssb;
-        Queue() {
+public:
+    std::stack<int> smn, ssb;
 
-        }
-        
-        void push(int x) {
-            smn.push(x);
-        }
+    void push(int x) {
+        smn.push(x);
+    }
 
-        void print() {
-            while (smn.size()) {
+    int pop() {
+        if (ssb.empty()) {
+            while (!smn.empty()) {
                 ssb.push(smn.top());
                 smn.pop();
             }
-            while (ssb.size()) {
-                cout << ssb.top() << " ";
-                smn.push(ssb.top());
-                ssb.pop();
-            }
-            cout << endl;
-            return;
         }
-        
-        int pop() {
-            while (smn.size()) {
-                ssb.push(smn.top());
-                smn.pop();
-            }
-            int x=ssb.top();
-            ssb.pop();
-            while (ssb.size()) {
-                smn.push(ssb.top());
-                ssb.pop();
-            }
-            return x;
+        if (ssb.empty()) {
+            return -1; // Or throw an exception, indicating an empty queue
         }
-        
-        int front() {
-            while (smn.size()) {
-                ssb.push(smn.top());
-                smn.pop();
-            }
-            int x=ssb.top();
-            while (ssb.size()) {
-                smn.push(ssb.top());
-                ssb.pop();
-            }
-            return x;
-        }
-        
-        bool empty() {
-            if (smn.size()==0)
-                return true;
-            return false;
-        }
+        int x = ssb.top();
+        ssb.pop();
+        return x;
+    }
 
-        int getSize() {
-            return smn.size();
+    int front() {
+        if (ssb.empty()) {
+            while (!smn.empty()) {
+                ssb.push(smn.top());
+                smn.pop();
+            }
         }
-    };
+        if (ssb.empty()) {
+            return -1; // Or throw an exception, indicating an empty queue
+        }
+        return ssb.top();
+    }
+
+    bool empty() {
+        return smn.empty() && ssb.empty();
+    }
+
+    int getSize() {
+        return smn.size() + ssb.size();
+    }
+};
 
 int main() {
     Queue s;
-
-    // Pushing elements onto the stack
-    int a, b, c;
-    cin>>a>>b>>c;
-    s.push(a);
-    s.push(b);
-    s.push(c);
-
-    s.print();
-    // Peek at the front element
-    cout << "Front element is: " << s.front() << endl;
-
-    // Pop elements from the stack
-    cout << "Popped: " << s.pop() << endl;
-    cout << "Popped: " << s.pop() << endl;
-    s.print();
-    // Check if stack is empty
-    cout << "Is the stack empty? " << (s.empty() ? "Yes" : "No") << endl;
-    s.print();
-    // Push another element
-    s.push(50);
-    s.print();
-    cout << "Size of the stack: " << s.getSize() << endl;
-
+    int t;
+    std::cin >> t;
+    while (t--) {
+        int n;
+        std::cin >> n;
+        switch (n) {
+            case 1: {
+                int x;
+                std::cin >> x;
+                s.push(x);
+                break;
+            }
+            case 2: {
+                if (!s.empty()) {
+                    s.pop();
+                }
+                break;
+            }
+            case 3: {
+                if (!s.empty()) {
+                    std::cout << s.front() << std::endl;
+                }
+                break;
+            }
+        }
+    }
     return 0;
 }

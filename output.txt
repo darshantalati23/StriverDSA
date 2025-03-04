@@ -1,9 +1,7 @@
-5 80 11 
-Front element is: 5
-Popped: 5
-Popped: 80
-11 
-Is the stack empty? No
-11 
-11 50 
-Size of the stack: 2
+abcd^e-*+
+abcd^e-fgh*+^*+i-
+pq+mn-*
+*/+AB+CD-EF
++-A/BC*DE
+-/*A+BCDE
+/+A*BC-DE
