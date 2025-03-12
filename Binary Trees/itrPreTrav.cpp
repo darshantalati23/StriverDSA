@@ -26,7 +26,7 @@ TreeNode* buildTree() {
         TreeNode* node = q.front();
         q.pop();
 
-        cout << "Enter left child of " << node->data << " (or -1 for NULL): ";
+        // cout << "Enter left child of " << node->data << " (or -1 for NULL): ";
         int leftVal;
         cin >> leftVal;
         if (leftVal != -1) {
@@ -34,7 +34,7 @@ TreeNode* buildTree() {
             q.push(node->left);
         }
 
-        cout << "Enter right child of " << node->data << " (or -1 for NULL): ";
+        // cout << "Enter right child of " << node->data << " (or -1 for NULL): ";
         int rightVal;
         cin >> rightVal;
         if (rightVal != -1) {
