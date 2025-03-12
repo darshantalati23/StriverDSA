@@ -13,7 +13,7 @@ struct TreeNode {
 ENTER ROOT, LEFT AND RIGHT IN RESPECTIVE ORDER. '-1' TO SKIP THAT CHILD/ROOT.
 */
 TreeNode* buildTree() {
-    cout << "Enter root value (or -1 for NULL): ";
+    // cout << "Enter root value (or -1 for NULL): ";
     int val;
     cin >> val;
     if (val == -1) return nullptr;
@@ -45,6 +45,20 @@ TreeNode* buildTree() {
     return root;
 }
 
+/**
+ * The given code performs an iterative preorder traversal
+ * of a binary tree using an explicit stack. It starts by checking
+ * if the root is `nullptr`, returning an empty vector if true.
+ * A stack is initialized with the root node, and a loop runs while
+ * the stack is not empty. In each iteration, the top node is popped,
+ * its value is added to the result vector, and its right child (if any)
+ * is pushed first, followed by the left child. This ensures that when
+ * popping from the stack, the left child is processed before the
+ * right child, maintaining the preorder sequence (Node → Left → Right).
+ * Unlike a recursive approach that relies on the system call stack,
+ * this method manually manages a stack, preventing stack overflow
+ * issues in deep trees while maintaining efficient traversal.
+ */
 vector<int> preOrder(TreeNode* root) {
     vector<int> p;
     if (root == nullptr) return p;
