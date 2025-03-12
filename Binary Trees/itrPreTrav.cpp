@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
+#define fr(T, s, e, it) for(T i=s; i<e; i+=it)
 
 struct TreeNode {
     int data;
@@ -8,6 +9,9 @@ struct TreeNode {
     TreeNode(int n) : data(n), left(nullptr), right(nullptr) {}
 };
 
+/*
+ENTER ROOT, LEFT AND RIGHT IN RESPECTIVE ORDER. '-1' TO SKIP THAT CHILD/ROOT.
+*/
 TreeNode* buildTree() {
     cout << "Enter root value (or -1 for NULL): ";
     int val;
@@ -41,36 +45,36 @@ TreeNode* buildTree() {
     return root;
 }
 
-vector<vector<int>> levelOrder(TreeNode* root) {
-    vector<vector<int>> ans;
-    if (root == nullptr) return ans;
-    queue<TreeNode*> q;
-    q.push(root);
+vector<int> preOrder(TreeNode* root) {
+    vector<int> p;
+    if (root == nullptr) return p;
 
-    while (!q.empty()) {
-        int sz = q.size();
-        vector<int> level;
-        for (int i = 0; i < sz; i++) {
-            TreeNode* node = q.front();
-            q.pop();
-            if (node->left != nullptr) q.push(node->left);
-            if (node->right != nullptr) q.push(node->right);
-            level.push_back(node->data);
+    stack<TreeNode*> st;
+    st.push(root);
+    while (!st.empty()) {
+        root = st.top();
+        st.pop();
+        p.push_back(root->data);
+        if (root->right != nullptr) {
+            st.push(root->right);
         }
-        ans.push_back(level);
+        if (root->left != nullptr) {
+            st.push(root->left);
+        }
     }
-    return ans;
+    return p;
 }
 
 int main() {
+    
     TreeNode* root = buildTree();
 
-    vector<vector<int>> levels = levelOrder(root);
+    vector<int> v = preOrder(root);
     cout << "Level Order Traversal:\n";
-    for (auto& level : levels) {
-        for (int val : level) cout << val << " ";
-        cout << endl;
+    for (auto it : v) {
+        cout << it << " ";
     }
+    cout << endl;
 
     return 0;
 }
