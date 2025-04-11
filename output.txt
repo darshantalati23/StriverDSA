@@ -1,2 +1,4 @@
-Enter root value (or -1 for NULL): Level Order Traversal:
-1 2 4 7 3 5 6 
+Root data: 1
+Left child data: 2
+Right child data: 3
+Left left child data: 4
