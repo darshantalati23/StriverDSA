@@ -2,6 +2,12 @@
 using namespace std;
 #define fr(T, s, e, it) for(T i=s; i<e; i+=it)
 
+/**
+ * Inorder: Left Root Right
+ * Preorder: Root Left Right
+ * Postorder: Left Right Root
+ */
+
 struct TreeNode {
     int data;
     TreeNode* left;
@@ -45,15 +51,15 @@ TreeNode* buildTree() {
     return root;
 }
 
-void preOrder(TreeNode* root) {
+void postOrder(TreeNode* root) {
     if (root == NULL) return;
+    postOrder(root->left);
+    postOrder(root->right);
     cout << root->data << " ";
-    preOrder(root->left);
-    preOrder(root->right);
 }
 
 signed main() {
     TreeNode* root = buildTree();
-    preOrder(root);
+    postOrder(root);
     return 0;
 }
