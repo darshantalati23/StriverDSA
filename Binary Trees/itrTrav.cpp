@@ -75,7 +75,26 @@ vector<int> preOrder(TreeNode* root) {
     }
 
     return v;
-} 
+}
+
+vector<int> inOrder(TreeNode* root) {
+    vector<int> v;
+    TreeNode* node = root;
+    stack<TreeNode*> st;
+    while (true) {
+        if (node!=nullptr) {
+            st.push(node);
+            node=node->left;
+        } else {
+            if (st.empty()) break;
+            node = st.top();
+            st.pop();
+            v.push_back(node->data);
+            node=node->right;
+        }
+    }
+    return v;
+}
 
 signed main() {
     
@@ -83,6 +102,13 @@ signed main() {
 
     vector<int> v = preOrder(root);
     cout << "Pre-Order Traversal:\n";
+    for (auto it : v) {
+        cout << it << " ";
+    }
+    cout << endl;
+
+    v = inOrder(root);
+    cout << "In-Order Traversal:\n";
     for (auto it : v) {
         cout << it << " ";
     }
