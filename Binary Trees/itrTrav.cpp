@@ -77,10 +77,23 @@ vector<int> preOrder(TreeNode* root) {
     return v;
 }
 
+/**
+ * Inorder Traversal
+ * The given code performs an iterative inorder traversal.
+ * First, we take a pointer to the root node and initialize
+ * a stack. Then, we enter a loop that runs while the stack
+ * is not empty. In each iteration, we check if the current
+ * node is not null. If not, we push it to stack, and assign
+ * node to its left. If NULL and stack not empty, we set the
+ * node to the top of stack, pop it, and add its data to the
+ * vector; followed by right child. If NULL and stack empty,
+ * we return the vector.
+ */
 vector<int> inOrder(TreeNode* root) {
     vector<int> v;
     TreeNode* node = root;
     stack<TreeNode*> st;
+
     while (true) {
         if (node!=nullptr) {
             st.push(node);
@@ -93,6 +106,7 @@ vector<int> inOrder(TreeNode* root) {
             node=node->right;
         }
     }
+    
     return v;
 }
 
