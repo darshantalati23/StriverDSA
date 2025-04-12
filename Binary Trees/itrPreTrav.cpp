@@ -60,31 +60,29 @@ TreeNode* buildTree() {
  * issues in deep trees while maintaining efficient traversal.
  */
 vector<int> preOrder(TreeNode* root) {
-    vector<int> p;
-    if (root == nullptr) return p;
+    vector<int> v;
+    if (root==nullptr) return v;
 
     stack<TreeNode*> st;
     st.push(root);
-    while (!st.empty()) {
-        root = st.top();
-        st.pop();
-        p.push_back(root->data);
-        if (root->right != nullptr) {
-            st.push(root->right);
-        }
-        if (root->left != nullptr) {
-            st.push(root->left);
-        }
-    }
-    return p;
-}
 
-int main() {
+    while (!st.empty()) {
+        root=st.top();
+        st.pop();
+        v.push_back(root->data);
+        if (root->right) st.push(root->right);
+        if (root->left) st.push(root->left);
+    }
+
+    return v;
+} 
+
+signed main() {
     
     TreeNode* root = buildTree();
 
     vector<int> v = preOrder(root);
-    cout << "Level Order Traversal:\n";
+    cout << "Pre-Order Traversal:\n";
     for (auto it : v) {
         cout << it << " ";
     }
