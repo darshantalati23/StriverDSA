@@ -11,14 +11,6 @@ using namespace std;
    /   \
   7     8
 
-s     f   i
- \   /|\ /
-  a-e-g-h
- /       \
-b         j
-|\
-c d
-
  Boundary Traversal : 1 2 4 7 8 6 3 -> "Anticlock-wise"
  */
 
