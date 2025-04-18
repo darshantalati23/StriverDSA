@@ -44,9 +44,10 @@ TreeNode* buildTree() {
     return root;
 }
 
-vector<vector<int>> vertical(TreeNode* root) {
+// Method 1
+/*vector<int> topView(TreeNode* root) {
     map<int, map<int, multiset<int>>> nodes; // (x, y, value); multiset - if same value
-    vector<vector<int>> v;
+    vector<int> v;
     if (!root) return v;
     queue<pair<TreeNode*, pair<int, int>>> todo;
     todo.push({root, {0, 0}});
@@ -60,22 +61,38 @@ vector<vector<int>> vertical(TreeNode* root) {
         if (node->right) todo.push({node->right, {x+1, y+1}});
     }
     for (auto p : nodes) {
-        vector<int> col;
-        for (auto q : p.second) {
-            col.insert(col.end(), q.second.begin(), q.second.end());
-        }
-        v.push_back(col);
+        v.push_back(*p.second.begin()->second.begin());
+    }
+    return v;
+}*/
+
+// Method 2
+vector<int> topView(TreeNode* root) {
+    vector<int> v;
+    if (!root) return v;
+    map<int, int> mpp;
+    queue<pair<TreeNode*, int>> q;
+    q.push({root, 0});
+    while (!q.empty()) {
+        auto it = q.front();
+        q.pop();
+        TreeNode* node = it.first;
+        int line = it.second;
+        if (mpp.find(line)==mpp.end()) mpp[line] = node->data;
+        if (node->left) q.push({node->left, line-1});
+        if (node->right) q.push({node->right, line+1});
+    }
+    for (auto it : mpp) {
+        v.push_back(it.second);
     }
     return v;
 }
 
 signed main() {
     TreeNode* root = buildTree();
-    vector<vector<int>> v = vertical(root);
+    vector<int> v = topView(root);
     for (int i=0; i<v.size(); i++) {
-        for (int j=0; j<v[i].size(); j++) {
-            cout << v[i][j] << " ";
-        }
+        cout << v[i] << " ";
     }
     return 0;
 }
