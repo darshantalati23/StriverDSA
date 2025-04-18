@@ -44,7 +44,30 @@ TreeNode* buildTree() {
     return root;
 }
 
-vector<int> topView(TreeNode* root) {
+// Method 1
+/*vector<int> bottomView(TreeNode* root) {
+    map<int, int> bottomNode;
+    queue<pair<TreeNode*, int>> q;
+    q.push({root, 0});
+
+    while (!q.empty()) {
+        auto [node, x] = q.front(); q.pop();
+
+        // overwrite every time (latest at this x is bottom-most)
+        bottomNode[x] = node->data;
+
+        if (node->left)  q.push({node->left, x - 1});
+        if (node->right) q.push({node->right, x + 1});
+    }
+
+    vector<int> ans;
+    for (auto& [x, val] : bottomNode)
+        ans.push_back(val);
+    return ans;
+}*/
+
+// Method 2
+vector<int> bottomView(TreeNode* root) {
     vector<int> v;
     if (!root) return v;
     map<int, int> mpp;
@@ -67,7 +90,7 @@ vector<int> topView(TreeNode* root) {
 
 signed main() {
     TreeNode* root = buildTree();
-    vector<int> v = topView(root);
+    vector<int> v = bottomView(root);
     for (int i=0; i<v.size(); i++) {
         cout << v[i] << " ";
     }
