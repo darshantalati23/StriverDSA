@@ -1,6 +1,5 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define fr(T, s, e, it) for(T i=s; i<e; i+=it)
 
 /**
  * Inorder: Left Root Right
