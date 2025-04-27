@@ -1,14 +1,3 @@
-/*
-With God's Grace,
-
- DDD     K   K   TTTTT       EEEEE   K   K     A     N   N   TTTTT  III   K   K
- D  D    K  K      T         E       K  K     A A    NN  N     T     I    K  K
- D   D   KKK       T         EEEE    KKK     AAAAA   N N N     T     I    KKK
- D  D    K  K      T   ____  E       K  K    A   A   N  NN     T     I    K  K
- DDD     K   K     T   ____  EEEEE   K   K   A   A   N   N     T    III   K   K
-
-*/
-
 #include <bits/stdc++.h>
 using namespace std;
 #define in(T, x) T x; cin >> x
@@ -16,45 +5,60 @@ using namespace std;
 #define outsp(y) cout << y << " "
 #define newl cout << endl
 
-/*
-If a number is at index 'i':
-parent = i/2
-left child = 2*i
-right child = 2*i + 1
-*/
+void heapify(vector<int> &arr, int n, int i) {
+    int largest = i;          // Initialize largest as root
+    int left = 2*i + 1;        // left = 2*i + 1
+    int right = 2*i + 2;       // right = 2*i + 2
 
-void heapify(int arr[], int n, int i) {
-    int lrg = i, left = 2*i, right = 2*i + 1;
-    if (left <= n && arr[lrg] < arr[left]) {
-        lrg = left;
-    }
-    if (right <= n && arr[lrg] < arr[right]) {
-        lrg = right;
-    }
+    // If left child is larger than root
+    if (left < n && arr[left] > arr[largest])
+        largest = left;
 
-    if (lrg != i) {
-        swap(arr[lrg], arr[i]);
-        heapify(arr, n, lrg);
+    // If right child is larger than largest so far
+    if (right < n && arr[right] > arr[largest])
+        largest = right;
+
+    // If largest is not root
+    if (largest != i) {
+        swap(arr[i], arr[largest]);
+        heapify(arr, n, largest); // Recursively heapify the affected subtree
     }
 }
 
-void heapSort(int arr[], int n) {
-    int size=n;
-    while (size > 0) {
-        // Step 1: Swap root and last last element
-        swap(arr[1], arr[size]);
-        size--;
-        //Step 2: Heapify
-        heapify(arr, size, 1);
+void heapSort(vector<int> &arr, int n) {
+    // Step 1: Build a max heap
+    for (int i = n/2 - 1; i >= 0; i--) {
+        heapify(arr, n, i);
     }
-    for (int i=1; i<=n; i++) {
-        outsp(arr[i]);
+
+    // Step 2: One by one extract elements
+    for (int i = n-1; i >= 0; i--) {
+        swap(arr[0], arr[i]); // Move current root to end
+        heapify(arr, i, 0);   // call max heapify on the reduced heap
     }
-    newl;
+}
+pair<vector<int>, int> input() {
+    vector<int> arr;
+    int n;
+    cin >> n;
+    for (int i=0; i<n; i++) {
+        int x;
+        cin >> x;
+        arr.push_back(x);
+    }
+    return make_pair(arr, n);
 }
 
 int main() {
-    int ar[7] = {-1, 30, 84, 55, 51, 36, 25};
-    heapSort(ar, 6);
+    auto [arr, n] = input();
+
+    heapSort(arr, arr.size());
+
+    // Print sorted array
+    for (int i=0; i<n; i++) {
+        outsp(arr[i]);
+    }
+    cout << endl;
+
     return 0;
 }
