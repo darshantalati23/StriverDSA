@@ -1,7 +1,9 @@
-#include <iostream>
-#include <vector>
-#include <queue>
+#include <bits/stdc++.h>
 using namespace std;
+#define in(T, x) T x; cin >> x
+#define outl(y) cout << y << endl
+#define outsp(y) cout << y << " "
+#define newl cout << endl
 
 class Solution {
 public:
@@ -51,8 +53,8 @@ public:
 };
 
 vector<vector<int>> inputGrid() {
-    int n, m;
-    cin>>n>>m;
+    in(int, n);
+    in(int, m);
 
     vector<vector<int>> grid(n, vector<int>(m));
     for (int i = 0; i < n; i++) {
