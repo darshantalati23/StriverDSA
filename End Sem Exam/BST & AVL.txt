@@ -1,0 +1,126 @@
+1. BST Insertion
+
+FUNCTION insert(node, key):
+    IF node is null:
+        RETURN new Node(key)
+    IF key < node.value:
+        node.left = insert(node.left, key)
+    ELSE IF key > node.value:
+        node.right = insert(node.right, key)
+    RETURN node
+
+-----
+
+2. BST Deletion
+
+FUNCTION delete(root, key):
+    IF root is null:
+        RETURN null  // Key not found
+    
+    IF key < root.value:
+        root.left = delete(root.left, key)  // Search in the left subtree
+    ELSE IF key > root.value:
+        root.right = delete(root.right, key)  // Search in the right subtree
+    ELSE:
+        // Case 1: Node has no children (leaf node)
+        IF root.left is null AND root.right is null:
+            RETURN null  // Remove the node
+
+        // Case 2: Node has one child
+        ELSE IF root.left is null:
+            RETURN root.right  // Replace node with its right child
+        ELSE IF root.right is null:
+            RETURN root.left  // Replace node with its left child
+
+        // Case 3: Node has two children
+        ELSE:
+            // Find the in-order successor (minimum node in right subtree)
+            successor = findMin(root.right)
+
+            // Replace the current node's value with the successor's value
+            root.value = successor.value
+
+            // Delete the successor node (which will have at most one child)
+            root.right = delete(root.right, successor.value)
+
+    RETURN root
+
+FUNCTION findMin(root):
+    WHILE root.left is not null:
+        root = root.left
+    RETURN root
+
+----------
+
+3. AVL Tree Insertion
+
+// Get height
+FUNCTION height(node):
+    IF node is null: RETURN 0
+    RETURN node.height
+
+// Get balance factor
+FUNCTION getBalance(node):
+    IF node is null: RETURN 0
+    RETURN height(node.left) - height(node.right)
+
+// Right rotate
+FUNCTION rightRotate(y):
+    x = y.left
+    T2 = x.right
+
+    x.right = y
+    y.left = T2
+
+    y.height = 1 + MAX(height(y.left), height(y.right))
+    x.height = 1 + MAX(height(x.left), height(x.right))
+
+    RETURN x
+
+// Left rotate
+FUNCTION leftRotate(x):
+    y = x.right
+    T2 = y.left
+
+    y.left = x
+    x.right = T2
+
+    x.height = 1 + MAX(height(x.left), height(x.right))
+    y.height = 1 + MAX(height(y.left), height(y.right))
+
+    RETURN y
+
+// AVL insert
+FUNCTION insert(node, key):
+    IF node is null:
+        RETURN new Node(key)
+
+    IF key < node.value:
+        node.left = insert(node.left, key)
+    ELSE IF key > node.value:
+        node.right = insert(node.right, key)
+    ELSE:
+        RETURN node  // duplicate keys not allowed
+
+    node.height = 1 + MAX(height(node.left), height(node.right))
+    balance = getBalance(node)
+
+    // Left Left
+    IF balance > 1 AND key < node.left.value:
+        RETURN rightRotate(node)
+
+    // Right Right
+    IF balance < -1 AND key > node.right.value:
+        RETURN leftRotate(node)
+
+    // Left Right
+    IF balance > 1 AND key > node.left.value:
+        node.left = leftRotate(node.left)
+        RETURN rightRotate(node)
+
+    // Right Left
+    IF balance < -1 AND key < node.right.value:
+        node.right = rightRotate(node.right)
+        RETURN leftRotate(node)
+
+    RETURN node

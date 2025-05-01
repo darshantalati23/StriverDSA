@@ -31,6 +31,11 @@ void heapSort(vector<int> &arr, int n) {
         heapify(arr, n, i);
     }
 
+    for (int i=0; i<n; i++) {
+        outsp(arr[i]);
+    }
+    newl;
+
     // Step 2: One by one extract elements
     for (int i = n-1; i >= 0; i--) {
         swap(arr[0], arr[i]); // Move current root to end
@@ -58,7 +63,7 @@ int main() {
     for (int i=0; i<n; i++) {
         outsp(arr[i]);
     }
-    cout << endl;
+    newl;
 
     return 0;
 }

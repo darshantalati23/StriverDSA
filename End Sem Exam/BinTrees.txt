@@ -1,0 +1,150 @@
+1. Iterative Inorder Traversal (Left → Root → Right)
+
+Initialize empty stack: stack
+Set current = root
+
+WHILE current is not null OR stack is not empty:
+    WHILE current is not null:
+        stack.push(current)
+        current = current.left
+    END WHILE
+    current = stack.pop()
+    PRINT current.value
+    current = current.right
+END WHILE
+
+----------
+
+2. Iterative Preorder Traversal (Root → Left → Right)
+
+IF root is null: RETURN
+
+Initialize stack with root: stack.push(root)
+
+WHILE stack is not empty:
+    node = stack.pop()
+    PRINT node.value
+
+    IF node.right is not null:
+        stack.push(node.right)
+    IF node.left is not null:
+        stack.push(node.left)
+
+---------
+
+3. Iterative Postorder Traversal (Left → Right → Root)
+(a) Using two stacks:
+
+IF root is null: RETURN
+
+Initialize stack1 and stack2
+stack1.push(root)
+
+WHILE stack1 is not empty:
+    node = stack1.pop()
+    stack2.push(node)
+
+    IF node.left is not null:
+        stack1.push(node.left)
+    IF node.right is not null:
+        stack1.push(node.right)
+
+WHILE stack2 is not empty:
+    node = stack2.pop()
+    PRINT node.value
+
+(b) Using one stack
+
+Initialize empty stack: stack
+Set current = root
+Set lastVisited = null
+
+WHILE current is not null OR stack is not empty:
+    IF current is not null:
+        stack.push(current)
+        current = current.left
+    ELSE:
+        peekNode = stack.top()
+
+        IF peekNode.right is not null AND lastVisited ≠ peekNode.right:
+            current = peekNode.right
+        ELSE:
+            PRINT peekNode.value
+            lastVisited = stack.pop()
+
+-------
+
+4. Level Order Traversal
+
+// Level order traversal using queue
+FUNCTION levelOrderTraversal(root):
+    IF root is null:
+        RETURN
+
+    queue = new empty queue
+    queue.enqueue(root)
+
+    WHILE queue is not empty:
+        node = queue.dequeue()
+        PRINT node.value
+
+        IF node.left is not null:
+            queue.enqueue(node.left)
+        IF node.right is not null:
+            queue.enqueue(node.right)
+
+------
+
+5. Height of BT
+
+// Calculate the height of a binary tree
+FUNCTION height(root):
+    IF root is null:
+        RETURN 0
+    leftHeight = height(root.left)
+    rightHeight = height(root.right)
+    RETURN MAX(leftHeight, rightHeight) + 1
+
+-------
+
+6. Balanced Binary Tree
+
+// height difference between left and right subtrees <= 1
+FUNCTION isBalanced(root):
+    IF root is null:
+        RETURN true
+
+    leftHeight = height(root.left)
+    rightHeight = height(root.right)
+
+    IF ABS(leftHeight - rightHeight) <= 1 AND isBalanced(root.left) AND isBalanced(root.right):
+        RETURN true
+    RETURN false
+
+--------
+
+7. Lowest Common Ancestor
+
+// Find the lowest common ancestor of two nodes in a binary tree
+FUNCTION LCA(root, n1, n2):
+    IF root is null:
+        RETURN null
+
+    IF root.value == n1 OR root.value == n2:
+        RETURN root
+
+    leftLCA = LCA(root.left, n1, n2)
+    rightLCA = LCA(root.right, n1, n2)
+
+    IF leftLCA is not null AND rightLCA is not null:
+        RETURN root
+
+    RETURN leftLCA IF leftLCA is not null ELSE rightLCA
+
+-------
+
+Operation	    Best Case	Average Case	Worst Case
+Insertion (BST)	O(log N)	O(log N)	    O(N)
+Deletion (BST)	O(log N)	O(log N)	    O(N)
+Search (BST)	O(1)	    O(log N)	    O(N)
+Lvl Odr (BFS)	O(N)	    O(N)	        O(N)
