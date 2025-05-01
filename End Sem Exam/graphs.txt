@@ -1,0 +1,72 @@
+1. BFS
+
+// BFS traversal starting from source vertex
+FUNCTION BFS(graph, startVertex):
+    visited = new array of size N, initialized to false
+    queue = new empty queue
+    visited[startVertex] = true
+    queue.enqueue(startVertex)
+
+    WHILE queue is not empty:
+        vertex = queue.dequeue()
+        PRINT vertex
+
+        FOR each neighbor of vertex:
+            IF neighbor is not visited:
+                visited[neighbor] = true
+                queue.enqueue(neighbor)
+
+-------
+
+2. DFS
+(a) Recursive:
+// DFS traversal using recursion
+FUNCTION DFS(graph, vertex, visited):
+    visited[vertex] = true
+    PRINT vertex
+
+    FOR auto neighbor : graph[vertex]: // for each neighbor
+        IF visited[neighbor] == false:
+            DFS(graph, neighbor, visited)
+
+(b) Iterative:
+// DFS traversal using stack
+FUNCTION DFSIterative(graph, startVertex):
+    visited = new array of size N, initialized to false
+    stack = new empty stack
+    stack.push(startVertex)
+
+    WHILE stack is not empty:
+        vertex = stack.pop()
+        IF visited[vertex] is false:
+            PRINT vertex
+            visited[vertex] = true
+
+        FOR auto neighbor : graph[vertex]: // for each neighbor
+            IF visited[neighbor] is false:
+                stack.push(neighbor)
+
+
+
+3. Shortest Path
+
+FUNCTION BFS_ShortestPath(graph, start, goal):
+    Initialize empty set: visited
+    Initialize queue: queue ← [(start, [start])]  // (current_node, path_so_far)
+
+    WHILE queue is not empty:
+        (current, path) = queue.dequeue()
+
+        IF current == goal:
+            RETURN path
+
+        IF current NOT IN visited:
+            visited.add(current)
+
+            FOR each neighbor IN graph[current]:
+                IF neighbor NOT IN visited:
+                    queue.enqueue((neighbor, path + [neighbor]))
+
+    RETURN "No path found"
+
+-----
