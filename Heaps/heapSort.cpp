@@ -31,6 +31,7 @@ void heapSort(vector<int> &arr, int n) {
         heapify(arr, n, i);
     }
 
+    outsp("Heapified:");
     for (int i=0; i<n; i++) {
         outsp(arr[i]);
     }
@@ -60,6 +61,7 @@ int main() {
     heapSort(arr, arr.size());
 
     // Print sorted array
+    cout << "HeapSorted: ";
     for (int i=0; i<n; i++) {
         outsp(arr[i]);
     }
