@@ -1,0 +1,117 @@
+1. Sortings
+
+SELECTION_SORT(array)
+  n = length(array)
+  for i = 0 to n-2
+    min_index = i
+    for j = i+1 to n-1
+      if array[j] < array[min_index]
+        min_index = j
+    if min_index != i
+      swap array[i] with array[min_index]
+
+BUBBLE_SORT(array)
+  n = length(array)
+  for i = 0 to n-2
+    swapped = false
+    for j = 0 to n-i-2
+      if array[j] > array[j+1]
+        swap array[j] with array[j+1]
+        swapped = true
+    if not swapped
+      break
+    // Optimization: if no two elements were swapped in inner loop, the array is sorted
+
+INSERTION_SORT(array)
+  n = length(array)
+  for i = 1 to n-1
+    key = array[i]
+    j = i-1
+    while j >= 0 and array[j] > key
+      array[j+1] = array[j]
+      j = j-1
+    array[j+1] = key
+
+> Merge Sort:
+
+MERGE_SORT(array, left, right)
+  if left < right
+    mid = (left + right) // 2
+    MERGE_SORT(array, left, mid)
+    MERGE_SORT(array, mid+1, right)
+    MERGE(array, left, mid, right)
+
+MERGE(array, left, mid, right)
+  n1 = mid - left + 1
+  n2 = right - mid
+  // Create temporary arrays
+  L = array of size n1
+  R = array of size n2
+  // Copy data to temporary arrays L[] and R[]
+  for i = 0 to n1-1
+    L[i] = array[left + i]
+  for j = 0 to n2-1
+    R[j] = array[mid + 1 + j]
+  // Merge the temporary arrays back into array[left...right]
+  i = 0 // Initial index of first subarray
+  j = 0 // Initial index of second subarray
+  k = left // Initial index of merged subarray
+  while i < n1 and j < n2
+    if L[i] <= R[j]
+      array[k] = L[i]
+      i = i + 1
+    else
+      array[k] = R[j]
+      j = j + 1
+    k = k + 1
+  // Copy the remaining elements of L[], if there are any
+  while i < n1
+    array[k] = L[i]
+    i = i + 1
+    k = k + 1
+  // Copy the remaining elements of R[], if there are any
+  while j < n2
+    array[k] = R[j]
+    j = j + 1
+    k = k + 1
+
+> Quick Sort:
+
+QUICK_SORT(array, low, high)
+  if low < high
+    pivot_index = PARTITION(array, low, high)
+    QUICK_SORT(array, low, pivot_index-1)
+    QUICK_SORT(array, pivot_index+1, high)
+
+PARTITION(array, low, high)
+  pivot = array[high] // Choose the last element as pivot
+  i = low - 1 // Index of smaller element
+  for j = low to high-1
+    if array[j] <= pivot
+      i = i + 1
+      swap array[i] with array[j]
+  swap array[i+1] with array[high]
+  return i + 1
+
+-------
+
+2. Singly LL Deletion
+
+DELETE_NODE_SLL(head, key)
+  if head is NULL
+    return NULL
+
+  if head.data equals key
+    return head.next // Delete the head node
+
+  current = head
+  while current.next is not NULL and current.next.data is not key
+    current = current.next
+
+  if current.next is NULL
+    return head // Key not found
+
+  current.next = current.next.next // Delete the node after current
+  return head
+
+Refer Gemini for rest

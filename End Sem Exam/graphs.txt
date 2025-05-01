@@ -46,7 +46,7 @@ FUNCTION DFSIterative(graph, startVertex):
             IF visited[neighbor] is false:
                 stack.push(neighbor)
 
-
+---------
 
 3. Shortest Path
 
