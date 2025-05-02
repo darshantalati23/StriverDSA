@@ -32,3 +32,20 @@ void sortKSortedArray(std::vector<int>& arr, int k) {
 }
 
 -----------
+
+2. k-th smallest element
+
+FIND-KTH-SMALLEST-MIN-HEAP(array, k)
+    // Create a min heap with all array elements
+    minHeap = new MinHeap()
+    
+    // Insert all elements into the min heap
+    for each element in array
+        minHeap.insert(element)
+    
+    // Extract min k-1 times
+    for i = 1 to k-1
+        minHeap.extractMin()
+    
+    // The root is now the kth smallest element
+    return minHeap.getMin()
