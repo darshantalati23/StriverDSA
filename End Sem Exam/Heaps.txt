@@ -1,0 +1,34 @@
+1. K-sorted array sorting
+
+void sortKSortedArray(std::vector<int>& arr, int k) {
+    // Create a min heap of size k+1
+    std::priority_queue<int, std::vector<int>, std::greater<int>> minHeap;
+    
+    // Result vector to store the sorted array
+    std::vector<int> result;
+    
+    // Process all elements in the array
+    for (int i = 0; i < arr.size(); i++) {
+        // Add current element to the min heap
+        minHeap.push(arr[i]);
+        
+        // If heap size exceeds k+1, extract the minimum element
+        if (minHeap.size() > k + 1) {
+            result.push_back(minHeap.top());
+            minHeap.pop();
+        }
+    }
+    
+    // Extract all remaining elements from the heap
+    while (!minHeap.empty()) {
+        result.push_back(minHeap.top());
+        minHeap.pop();
+    }
+    
+    // Copy result back to original array
+    for (int i = 0; i < arr.size(); i++) {
+        arr[i] = result[i];
+    }
+}
+
+-----------

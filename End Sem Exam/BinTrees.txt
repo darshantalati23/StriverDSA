@@ -143,6 +143,48 @@ FUNCTION LCA(root, n1, n2):
 
 -------
 
+8. BT Deletion
+
+FUNCTION DELETE_NODE(root, key):
+    IF root is NULL:
+        RETURN root  // Key not found, tree is empty
+
+    IF key < root.data:
+        root.left = DELETE_NODE(root.left, key)
+    ELSE IF key > root.data:
+        root.right = DELETE_NODE(root.right, key)
+    ELSE:  // Key found at the current root node
+        // Case 1: Node has no children or only one child
+        IF root.left is NULL:
+        temp = root.right
+        free root
+        RETURN temp
+        ELSE IF root.right is NULL:
+        temp = root.left
+        free root
+        RETURN temp
+
+        // Case 2: Node has two children
+        // Find the inorder successor (smallest node in the right subtree)
+        successor = FIND_MIN(root.right)
+
+        // Copy the inorder successor's data to this node
+        root.data = successor.data
+
+        // Delete the inorder successor from the right subtree
+        root.right = DELETE_NODE(root.right, successor.data)
+
+    RETURN root
+
+
+FUNCTION FIND_MIN(node):
+    current = node
+    WHILE current.left is not NULL:
+        current = current.left
+    RETURN current
+
+--------
+
 Operation	    Best Case	Average Case	Worst Case
 Insertion (BST)	O(log N)	O(log N)	    O(N)
 Deletion (BST)	O(log N)	O(log N)	    O(N)
