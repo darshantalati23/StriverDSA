@@ -1,2 +1,1 @@
-Heapified: 55 41 10 21 20 
-HeapSorted: 10 20 21 41 55 
+Sorted: 10 20 21 41 55 
