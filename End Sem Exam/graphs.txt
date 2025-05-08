@@ -69,4 +69,39 @@ FUNCTION BFS_ShortestPath(graph, start, goal):
 
     RETURN "No path found"
 
------
+------
+
+IS-BIPARTITE-BFS(graph)
+    n = number of vertices in graph
+    
+    // Initialize color array with -1 (uncolored)
+    color[1...n] = {-1, -1, ..., -1}
+    
+    // Process each connected component
+    for start = 1 to n
+        // Skip if already colored
+        if color[start] != -1
+            continue
+            
+        // Start BFS from this vertex with color 0
+        color[start] = 0
+        queue = new Queue()
+        queue.enqueue(start)
+        
+        // Standard BFS traversal
+        while queue is not empty
+            current = queue.dequeue()
+            
+            // Check all adjacent vertices
+            for each neighbor of current
+                // If uncolored, assign opposite color and enqueue
+                if color[neighbor] == -1
+                    color[neighbor] = 1 - color[current]  // Flip 0 to 1 or 1 to 0
+                    queue.enqueue(neighbor)
+                    
+                // If already colored with same color as current, graph is not bipartite
+                else if color[neighbor] == color[current]
+                    return false
+    
+    // If we can color all vertices without conflicts, graph is bipartite
+    return true
