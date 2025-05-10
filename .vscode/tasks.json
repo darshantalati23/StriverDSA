@@ -27,6 +27,9 @@
       "linux": {
         "command": "g++ \"${file}\" -o \"${fileBasenameNoExtension}\" && ./\"${fileBasenameNoExtension}\" < input.txt > output.txt && rm \"${fileBasenameNoExtension}\""
       },
+      "mac": {
+        "command": "g++ \"${file}\" -o \"${fileBasenameNoExtension}\" && ./\"${fileBasenameNoExtension}\" < input.txt > output.txt && rm \"${fileBasenameNoExtension}\""
+      },
       "presentation": {
         "reveal": "never",
         "focus": false,
