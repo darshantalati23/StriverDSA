@@ -3,6 +3,10 @@
  * Write a program to in-place sort the array without using inbuilt sort functions.
  * (Expected: Single pass-O(N) and constant space)
  * 
+ * Brute: Manual Sorting (O(nlogn))
+ * 
+ * Better: Count number of 0's, 1's and 2's and then change the original array (O(2n))
+ * 
  * Optimal Approach:
  *  ---------------
  * |   |   |   |   |
