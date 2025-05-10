@@ -1,0 +1,69 @@
+/**
+ * Problem Statement: Given an array consisting of only 0s, 1s, and 2s.
+ * Write a program to in-place sort the array without using inbuilt sort functions.
+ * (Expected: Single pass-O(N) and constant space)
+ * 
+ * Brute: Try all subarrays
+ * Iterate all elements, for every make arrays of different lengths starting from it
+ * i: 0->n
+ *    j: i->n
+ *    sum=0
+ *       k: i->j
+ *       sum+=arr[k]
+ *    max(sum, maxs)
+ * 
+ * Time Complexity: O(n^3)
+ * Space Complexity: O(1)
+ * 
+ * Better: Two loops in above steps, instead of 3
+ * i: 0->n
+ *    sum=0
+ *    j: i->n
+ *       sum+=arr[j]
+ * 
+ * Time Complexity: O(n^2)
+ * Space Complexity: O(1)
+ * 
+ * Optimal Approach:
+ *  ---------------
+ * |   |   |   |   |
+ *  ---------------
+ *   I  II  III  IV
+ * I: low - all 0's
+ * II: mid - all 1's
+ * III: mid <-> high - mixed bag ----> Target: sort these elements & shorten this segment
+ * IV: high - all 2's
+ * 
+ * DUTCH NATIONAL FLAG ALGORITHM
+ * 
+ * Time Complexity: O(n)
+ * Space Complexity: O(1)
+ */
+
+#include <bits/stdc++.h>
+using namespace std;
+#define in(T, x) T x; cin >> x
+#define outl(y) cout << y << endl
+#define outsp(y) cout << y << " "
+#define newl cout << endl
+#define vin(T, v, n) vector<T> v(n); for (int i=0; i<n; i++) cin>>v[i]
+
+int maxSub(vector<int> &arr, int n) {
+    int i=0, maxs=INT_MIN, sum=0;
+    while (i<n) {
+        sum+=arr[i];
+        maxs=max(maxs, sum);
+        sum=max(sum, 0);
+        i++;
+    }
+    return maxs;
+}
+
+int main() {
+    in(int, n);
+    vin(int, arr, n);
+
+    int maxSS=maxSub(arr, n);
+
+    cout << "Max Subarray Sum = " << maxSS << endl;
+}
