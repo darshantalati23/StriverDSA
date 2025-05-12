@@ -1,1 +1,1 @@
-Majority Element does not exist.
+Maximum Profit = 6
